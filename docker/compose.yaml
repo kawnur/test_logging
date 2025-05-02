@@ -45,8 +45,10 @@ services:
               target: /usr/lib/x86_64-linux-gnu/mySharedLibs
 
     fluentdService:
-        command: fluentd -c /my/fluentd/conf
+        #command: fluentd -c /my/fluentd/conf
         #command: sleep infinity
+        command: /my/scripts/run
+        user: root
         depends_on:
             - dbService
         environment:
@@ -65,6 +67,9 @@ services:
             - type: bind
               source: ./conf/fluentd
               target: /my/fluentd
+            - type: bind
+              source: ./scripts/fluentdservice
+              target: /my/scripts
 
     dbService:
         image: dbservice

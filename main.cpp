@@ -33,34 +33,37 @@ int main(int argc, char *argv[])
 
     QString ipAddress { std::getenv("FLUENTD_SERVICE_ADDRESS") };
     QString port { std::getenv("FLUENTD_SERVICE_PORT") };
-    QString path { "log.Db.1" };
 
-    QString urlString = QString("http://%1:%2/%3").arg(
-                ipAddress, port, path);
-
-    request.setUrl(QUrl(urlString));
+    std::vector<QString> paths { "log.Db.1", "log.Db.2" };
 
     while (true) {
-        QEventLoop loop;
+        for (auto& path : paths) {
+            QEventLoop loop;
 
-        QString dataString = QString("[%1][%2][%3][%4]: %5").arg(
-                    QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz"),
-                    mark1, mark2, mark3, getRandomString(20));
+            QString urlString = QString("http://%1:%2/%3").arg(
+                        ipAddress, port, path);
 
-        qDebug() << dataString;
+            request.setUrl(QUrl(urlString));
 
-        QJsonObject jsonObject;
-        jsonObject["data"] = dataString;
+            QString dataString = QString("[%1][%2][%3][%4]: %5").arg(
+                        QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz"),
+                        mark1, mark2, mark3, getRandomString(20));
 
-        QNetworkReply *replyPtr = manager.post(request, QJsonDocument(jsonObject).toJson());
-//        manager.post(request, QJsonDocument(jsonObject).toJson());
+            qDebug() << dataString;
 
-        QObject::connect(replyPtr, SIGNAL(finished()),
-                &loop, SLOT(quit()));
+            QJsonObject jsonObject;
+            jsonObject["data"] = dataString;
 
-        loop.exec();
+            QNetworkReply *replyPtr = manager.post(request, QJsonDocument(jsonObject).toJson());
+    //        manager.post(request, QJsonDocument(jsonObject).toJson());
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+            QObject::connect(replyPtr, SIGNAL(finished()),
+                    &loop, SLOT(quit()));
+
+            loop.exec();
+
+            std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        }
     }
 
     return a.exec();

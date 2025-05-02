@@ -1,0 +1,7 @@
+#!/bin/bash
+echo Creating file for SQL data...
+touch /my/fluentd/sql_state
+#chmod 777 /my/fluentd/sql_state
+echo Starting fluentd service...
+fluentd -c /my/fluentd/conf
+#sleep infinity
