@@ -1,0 +1,42 @@
+<source>
+    @type http
+    port 24224
+    bind 0.0.0.0
+</source>
+
+<filter log.Db.*>
+    @type parser
+    key_name data
+    reserve_time true
+    <parse>
+        @type regexp
+        expression /^\[(?<logtime>[^\]]*)\]\[(?<field1>[^ ]*)\]\[(?<field2>[^ ]*)\]\[(?<field3>[^ ]*)\]: (?<log_message>.*)$/
+        time_key logtime
+        time_format %Y-%m-%d %H:%M:%S
+        types field1:string, field2:string, field3:string, log_message:string
+        keep_time_key true
+    </parse>
+</filter>
+
+#<filter **>
+#    @type stdout
+#</filter>
+
+<match log.Db.*>
+    @type sql
+    host "#{ENV['DB_SERVICE_ADDRESS']}"
+    port "#{ENV['DB_SERVICE_PORT']}"
+    database "#{ENV['DB_SERVICE_DATABASE']}"
+    adapter postgresql
+    username "#{ENV['DB_SERVICE_USERNAME']}"
+    password "#{ENV['DB_SERVICE_PASSWORD']}"
+
+    <table>
+        table test1
+        column_mapping 'logtime:timepoint, field1, field2, field3, log_message'
+    </table>
+
+    <buffer>
+        flush_interval 1s
+    </buffer>
+</match>
