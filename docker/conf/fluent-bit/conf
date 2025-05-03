@@ -1,0 +1,36 @@
+[SERVICE]
+    Parsers_File ./parsers.conf
+
+[INPUT]
+    Name http
+    #Tag my_http_input
+    Listen 0.0.0.0
+    Port 9880
+
+[FILTER]
+    Name parser
+    Match log.Db.*
+    #Match my_http_input
+    Key_Name data
+    Parser parseServiceHTTPData
+
+[OUTPUT]
+    Name  stdout
+    #Match my_http_input
+    #Match *
+    Match log.Db.*
+
+[OUTPUT]
+    Name                pgsql
+    Match               log.Db.*
+    #Match               my_http_input
+    #Match               timepoint
+    Host                10.100.100.30
+    Port                5432
+    User                postgres
+    Password            postgres
+    Database            postgres
+    Table               test3
+    #Connection_Options  -c statement_timeout=0
+    Timestamp_Key       logtime
+

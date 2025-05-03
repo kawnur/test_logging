@@ -31,10 +31,13 @@ int main(int argc, char *argv[])
 //    QObject::connect(replyPtr, SIGNAL(finished()),
 //                     &loop, SLOT(quit()));
 
-    QString ipAddress { std::getenv("FLUENTD_SERVICE_ADDRESS") };
-    QString port { std::getenv("FLUENTD_SERVICE_PORT") };
+//    QString ipAddress { std::getenv("FLUENTD_SERVICE_ADDRESS") };
+//    QString port { std::getenv("FLUENTD_SERVICE_PORT") };
+    QString ipAddress { std::getenv("FLUENTBIT_SERVICE_ADDRESS") };
+    QString port { std::getenv("FLUENTBIT_SERVICE_PORT") };
 
-    std::vector<QString> paths { "log.Db.1", "log.Db.2" };
+//    std::vector<QString> paths { "log.Db.1", "log.Db.2" };
+    std::vector<QString> paths { "log.Db.1" };
 
     while (true) {
         for (auto& path : paths) {
@@ -44,6 +47,7 @@ int main(int argc, char *argv[])
                         ipAddress, port, path);
 
             request.setUrl(QUrl(urlString));
+//            qDebug() << request.url();
 
             QString dataString = QString("[%1][%2][%3][%4]: %5").arg(
                         QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz"),

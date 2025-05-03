@@ -13,3 +13,11 @@ create table test2 (
     field3 varchar(30),
     log_message varchar(500)
 );
+
+create table test3 (
+    timepoint timestamp without time zone,
+    field1 varchar(30),
+    field2 varchar(30),
+    field3 varchar(30),
+    log_message varchar(500)
+);
