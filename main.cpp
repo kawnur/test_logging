@@ -39,7 +39,10 @@ int main(int argc, char *argv[])
 //    std::vector<QString> paths { "log.Db.1", "log.Db.2" };
     std::vector<QString> paths { "log.Db.1" };
 
-    while (true) {
+    int i = 0;
+
+//    while (true) {
+    while (i++ < 10) {
         for (auto& path : paths) {
             QEventLoop loop;
 
@@ -48,9 +51,11 @@ int main(int argc, char *argv[])
 
             request.setUrl(QUrl(urlString));
 //            qDebug() << request.url();
+            QString format { "yyyy-MM-dd hh:mm:ss.zzz" };
+//            QString format { "yyyy-MM-dd hh:mm:ss" };
 
             QString dataString = QString("[%1][%2][%3][%4]: %5").arg(
-                        QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz"),
+                        QDateTime::currentDateTime().toString(format),
                         mark1, mark2, mark3, getRandomString(20));
 
             qDebug() << dataString;
