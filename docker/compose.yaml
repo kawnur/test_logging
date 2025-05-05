@@ -7,9 +7,9 @@ services:
             - fluentbitService
         environment:
             - FLUENTD_SERVICE_ADDRESS=$TEST_LOGGING_FLUENTDSERVICE_IPV4_ADDRESS
-            - FLUENTD_SERVICE_PORT=$TEST_LOGGING_FLUENTDSERVICE_IPV4_PORT
+            - FLUENTD_SERVICE_PORT=$TEST_LOGGING_FLUENTDSERVICE_PORT
             - FLUENTBIT_SERVICE_ADDRESS=$TEST_LOGGING_FLUENTBITSERVICE_IPV4_ADDRESS
-            - FLUENTBIT_SERVICE_PORT=$TEST_LOGGING_FLUENTBITSERVICE_IPV4_PORT
+            - FLUENTBIT_SERVICE_PORT=$TEST_LOGGING_FLUENTBITSERVICE_PORT
         image: service
         networks:
             testLoggingNetwork:
@@ -32,9 +32,9 @@ services:
             - fluentbitService
         environment:
             - FLUENTD_SERVICE_ADDRESS=$TEST_LOGGING_FLUENTDSERVICE_IPV4_ADDRESS
-            - FLUENTD_SERVICE_PORT=$TEST_LOGGING_FLUENTDSERVICE_IPV4_PORT
+            - FLUENTD_SERVICE_PORT=$TEST_LOGGING_FLUENTDSERVICE_PORT
             - FLUENTBIT_SERVICE_ADDRESS=$TEST_LOGGING_FLUENTBITSERVICE_IPV4_ADDRESS
-            - FLUENTBIT_SERVICE_PORT=$TEST_LOGGING_FLUENTBITSERVICE_IPV4_PORT
+            - FLUENTBIT_SERVICE_PORT=$TEST_LOGGING_FLUENTBITSERVICE_PORT
         image: service
         networks:
             testLoggingNetwork:
@@ -59,7 +59,7 @@ services:
 #            - dbService
 #        environment:
 #            - DB_SERVICE_ADDRESS=$TEST_LOGGING_DBSERVICE_IPV4_ADDRESS
-#            - DB_SERVICE_PORT=$TEST_LOGGING_DBSERVICE_IPV4_PORT
+#            - DB_SERVICE_PORT=$TEST_LOGGING_DBSERVICE_PORT
 #            - DB_SERVICE_DATABASE=postgres
 #            - DB_SERVICE_USERNAME=$TEST_LOGGING_DBSERVICE_POSTGRES_USER
 #            - DB_SERVICE_PASSWORD=$TEST_LOGGING_DBSERVICE_POSTGRES_PASSWORD
@@ -68,7 +68,7 @@ services:
 #            testLoggingNetwork:
 #                ipv4_address: $TEST_LOGGING_FLUENTDSERVICE_IPV4_ADDRESS
 #        ports:
-#            - $TEST_LOGGING_FLUENTDSERVICE_IPV4_PORT:$TEST_LOGGING_FLUENTDSERVICE_IPV4_PORT
+#            - $TEST_LOGGING_FLUENTDSERVICE_PORT:$TEST_LOGGING_FLUENTDSERVICE_PORT
 #        volumes:
 #            - type: bind
 #              source: ./conf/fluentd
@@ -86,7 +86,7 @@ services:
             - dbService
         environment:
             - DB_SERVICE_ADDRESS=$TEST_LOGGING_DBSERVICE_IPV4_ADDRESS
-            - DB_SERVICE_PORT=$TEST_LOGGING_DBSERVICE_IPV4_PORT
+            - DB_SERVICE_PORT=$TEST_LOGGING_DBSERVICE_PORT
             - DB_SERVICE_DATABASE=postgres
             - DB_SERVICE_USERNAME=$TEST_LOGGING_DBSERVICE_POSTGRES_USER
             - DB_SERVICE_PASSWORD=$TEST_LOGGING_DBSERVICE_POSTGRES_PASSWORD
@@ -95,7 +95,7 @@ services:
             testLoggingNetwork:
                 ipv4_address: $TEST_LOGGING_FLUENTBITSERVICE_IPV4_ADDRESS
         ports:
-            - $TEST_LOGGING_FLUENTBITSERVICE_IPV4_PORT:$TEST_LOGGING_FLUENTBITSERVICE_IPV4_PORT
+            - $TEST_LOGGING_FLUENTBITSERVICE_PORT:$TEST_LOGGING_FLUENTBITSERVICE_PORT
         volumes:
             - type: bind
               source: ./conf/fluent-bit
@@ -113,7 +113,7 @@ services:
 #            - dbService
 #        environment:
 #            - DB_SERVICE_ADDRESS=$TEST_LOGGING_DBSERVICE_IPV4_ADDRESS
-#            - DB_SERVICE_PORT=$TEST_LOGGING_DBSERVICE_IPV4_PORT
+#            - DB_SERVICE_PORT=$TEST_LOGGING_DBSERVICE_PORT
 #            - DB_SERVICE_DATABASE=postgres
 #            - DB_SERVICE_USERNAME=$TEST_LOGGING_DBSERVICE_POSTGRES_USER
 #            - DB_SERVICE_PASSWORD=$TEST_LOGGING_DBSERVICE_POSTGRES_PASSWORD
@@ -122,7 +122,7 @@ services:
 #            testLoggingNetwork:
 #                ipv4_address: $TEST_LOGGING_LOGSTASHSERVICE_IPV4_ADDRESS
 #        ports:
-#            - $TEST_LOGGING_LOGSTASHSERVICE_IPV4_PORT:$TEST_LOGGING_LOGSTASHSERVICE_IPV4_PORT
+#            - $TEST_LOGGING_LOGSTASHSERVICE_PORT:$TEST_LOGGING_LOGSTASHSERVICE_PORT
 #        volumes:
 #            - type: bind
 #              source: ./conf/fluentd
@@ -137,7 +137,7 @@ services:
             testLoggingNetwork:
                 ipv4_address: $TEST_LOGGING_DBSERVICE_IPV4_ADDRESS
         ports:
-            - $TEST_LOGGING_DBSERVICE_IPV4_PORT:$TEST_LOGGING_DBSERVICE_IPV4_PORT
+            - $TEST_LOGGING_DBSERVICE_PORT:$TEST_LOGGING_DBSERVICE_PORT
         environment:
             - POSTGRES_USER=$TEST_LOGGING_DBSERVICE_POSTGRES_USER
             - POSTGRES_PASSWORD=$TEST_LOGGING_DBSERVICE_POSTGRES_PASSWORD
