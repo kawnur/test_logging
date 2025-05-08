@@ -16,4 +16,12 @@ RUN sh /install-debian-bookworm-fluent-package5.sh
 RUN fluent-gem install fluent-plugin-sql --no-document
 RUN fluent-gem install pg --no-document
 
+FROM debian AS logstashservice
+USER root
+RUN mkdir /logstash
+COPY /home/user/distrib/logstash-9.0.1/ /logstash/
+RUN useradd logstashuser
+RUN chown -R logstashuser:logstashuser /logstash
+USER logstashuser
+
 FROM postgres AS dbservice

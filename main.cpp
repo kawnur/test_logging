@@ -33,16 +33,18 @@ int main(int argc, char *argv[])
 
 //    QString ipAddress { std::getenv("FLUENTD_SERVICE_ADDRESS") };
 //    QString port { std::getenv("FLUENTD_SERVICE_PORT") };
-    QString ipAddress { std::getenv("FLUENTBIT_SERVICE_ADDRESS") };
-    QString port { std::getenv("FLUENTBIT_SERVICE_PORT") };
+//    QString ipAddress { std::getenv("FLUENTBIT_SERVICE_ADDRESS") };
+//    QString port { std::getenv("FLUENTBIT_SERVICE_PORT") };
+    QString ipAddress { std::getenv("LOGSTASH_SERVICE_ADDRESS") };
+    QString port { std::getenv("LOGSTASH_SERVICE_PORT") };
 
 //    std::vector<QString> paths { "log.Db.1", "log.Db.2" };
     std::vector<QString> paths { "log.Db.1" };
 
     int i = 0;
 
-//    while (true) {
-    while (i++ < 10) {
+    while (true) {
+//    while (i++ < 10) {
         for (auto& path : paths) {
             QEventLoop loop;
 
@@ -51,6 +53,7 @@ int main(int argc, char *argv[])
 
             request.setUrl(QUrl(urlString));
 //            qDebug() << request.url();
+
             QString format { "yyyy-MM-dd hh:mm:ss.zzz" };
 //            QString format { "yyyy-MM-dd hh:mm:ss" };
 
@@ -58,7 +61,7 @@ int main(int argc, char *argv[])
                         QDateTime::currentDateTime().toString(format),
                         mark1, mark2, mark3, getRandomString(20));
 
-            qDebug() << dataString;
+//            qDebug() << dataString;
 
             QJsonObject jsonObject;
             jsonObject["data"] = dataString;
