@@ -3,7 +3,16 @@ mkdir /logstash/config/pipeline
 cp /my/logstash/pipelines.yml /logstash/config
 cp /my/logstash/pipeline.conf /logstash/config/pipeline
 
+# old
+#mkdir /usr/share/logstash/config/pipeline
+#cp /my/logstash/pipelines.yml /usr/share/logstash/config
+#cp /my/logstash/pipeline.conf /usr/share/logstash
+
 #/logstash/bin/logstash --api.http.host "0.0.0.0" --path.config /logstash/config --path.settings /logstash/config
 #/logstash/bin/logstash --api.http.host "0.0.0.0" --path.config /logstash/config/pipeline --path.settings /logstash/config
 /logstash/bin/logstash --api.http.host "0.0.0.0" -f /logstash/config/pipeline/pipeline.conf --path.settings /logstash/config
+
 #sleep infinity
+
+# old
+#/usr/share/logstash/bin/logstash --http.host "0.0.0.0" -f /usr/share/logstash/pipeline.conf --path.settings /usr/share/logstash/config

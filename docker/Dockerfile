@@ -20,8 +20,15 @@ FROM debian AS logstashservice
 USER root
 RUN mkdir /logstash
 COPY /home/user/distrib/logstash-9.0.1/ /logstash/
+RUN mkdir -p /logstash/vendor/jar/jdbc
+COPY /home/user/distrib/postgresql-42.7.5.jar /logstash/vendor/jar/jdbc/
 RUN useradd logstashuser
 RUN chown -R logstashuser:logstashuser /logstash
+RUN /logstash/bin/logstash-plugin install logstash-output-jdbc
 USER logstashuser
+
+#FROM logstash:5.6.16 AS logstashserviceold
+#WORKDIR /usr/share/logstash
+#RUN ./bin/logstash-plugin install logstash-output-jdbc
 
 FROM postgres AS dbservice
