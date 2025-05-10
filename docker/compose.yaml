@@ -124,6 +124,7 @@ services:
             - DB_SERVICE_DATABASE=postgres
             - DB_SERVICE_USERNAME=$TEST_LOGGING_DBSERVICE_POSTGRES_USER
             - DB_SERVICE_PASSWORD=$TEST_LOGGING_DBSERVICE_POSTGRES_PASSWORD
+            - MY_PORT=$TEST_LOGGING_LOGSTASHSERVICE_PORT
         image: logstashservice
         networks:
             testLoggingNetwork:

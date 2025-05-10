@@ -16,3 +16,6 @@ cp /my/logstash/pipeline.conf /logstash/config/pipeline
 
 # old
 #/usr/share/logstash/bin/logstash --http.host "0.0.0.0" -f /usr/share/logstash/pipeline.conf --path.settings /usr/share/logstash/config
+
+# test config and exit
+#bin/logstash -f second-pipeline.conf --config.test_and_exit
