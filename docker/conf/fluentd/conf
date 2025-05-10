@@ -7,12 +7,19 @@
         @type http
         port 24224
         bind 0.0.0.0
+        #add_http_headers true
+        add_remote_addr true
     </source>
+
+#    <filter **>
+#        @type stdout
+#    </filter>
 
     <filter log.Db.*>
         @type parser
         key_name data
         reserve_time true
+        reserve_data true
         <parse>
             @type regexp
             expression /^\[(?<logtime>[^\]]*)\]\[(?<field1>[^ ]*)\]\[(?<field2>[^ ]*)\]\[(?<field3>[^ ]*)\]: (?<log_message>.*)$/
@@ -46,7 +53,7 @@
 
         <table>
             table test1
-            column_mapping 'logtime:timepoint, field1, field2, field3, log_message'
+            column_mapping 'logtime:timepoint, REMOTE_ADDR:service_ip, field1, field2, field3, log_message'
         </table>
 
         <buffer>
