@@ -24,6 +24,14 @@
     </filter>
 
     <filter **>
+        @type grep
+        <regexp>
+            key log_message
+            pattern /.*a.*/
+        </regexp>
+    </filter>
+
+    <filter **>
         @type stdout
     </filter>
 

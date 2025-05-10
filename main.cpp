@@ -31,12 +31,12 @@ int main(int argc, char *argv[])
 //    QObject::connect(replyPtr, SIGNAL(finished()),
 //                     &loop, SLOT(quit()));
 
-//    QString ipAddress { std::getenv("FLUENTD_SERVICE_ADDRESS") };
-//    QString port { std::getenv("FLUENTD_SERVICE_PORT") };
+    QString ipAddress { std::getenv("FLUENTD_SERVICE_ADDRESS") };
+    QString port { std::getenv("FLUENTD_SERVICE_PORT") };
 //    QString ipAddress { std::getenv("FLUENTBIT_SERVICE_ADDRESS") };
 //    QString port { std::getenv("FLUENTBIT_SERVICE_PORT") };
-    QString ipAddress { std::getenv("LOGSTASH_SERVICE_ADDRESS") };
-    QString port { std::getenv("LOGSTASH_SERVICE_PORT") };
+//    QString ipAddress { std::getenv("LOGSTASH_SERVICE_ADDRESS") };
+//    QString port { std::getenv("LOGSTASH_SERVICE_PORT") };
 
 //    std::vector<QString> paths { "log.Db.1", "log.Db.2" };
     std::vector<QString> paths { "log.Db.1" };

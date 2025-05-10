@@ -3,9 +3,9 @@ services:
         command: /my/scripts/run
         #command: sleep infinity
         depends_on:
-            #- fluentdService
+            - fluentdService
             #- fluentbitService
-            - logstashService
+            #- logstashService
             #- logstashServiceOld
         environment:
             - FLUENTD_SERVICE_ADDRESS=$TEST_LOGGING_FLUENTDSERVICE_IPV4_ADDRESS
@@ -32,9 +32,9 @@ services:
     service2:
         command: /my/scripts/run
         depends_on:
-            #- fluentdService
+            - fluentdService
             #- fluentbitService
-            - logstashService
+            #- logstashService
             #- logstashServiceOld
         environment:
             - FLUENTD_SERVICE_ADDRESS=$TEST_LOGGING_FLUENTDSERVICE_IPV4_ADDRESS
@@ -58,32 +58,32 @@ services:
               source: /usr/lib/x86_64-linux-gnu/
               target: /usr/lib/x86_64-linux-gnu/mySharedLibs
 
-#    fluentdService:
-#        #command: fluentd -c /my/fluentd/conf
-#        #command: sleep infinity
-#        command: /my/scripts/run
-#        user: root
-#        depends_on:
-#            - dbService
-#        environment:
-#            - DB_SERVICE_ADDRESS=$TEST_LOGGING_DBSERVICE_IPV4_ADDRESS
-#            - DB_SERVICE_PORT=$TEST_LOGGING_DBSERVICE_PORT
-#            - DB_SERVICE_DATABASE=postgres
-#            - DB_SERVICE_USERNAME=$TEST_LOGGING_DBSERVICE_POSTGRES_USER
-#            - DB_SERVICE_PASSWORD=$TEST_LOGGING_DBSERVICE_POSTGRES_PASSWORD
-#        image: fluentdservice
-#        networks:
-#            testLoggingNetwork:
-#                ipv4_address: $TEST_LOGGING_FLUENTDSERVICE_IPV4_ADDRESS
-#        ports:
-#            - $TEST_LOGGING_FLUENTDSERVICE_PORT:$TEST_LOGGING_FLUENTDSERVICE_PORT
-#        volumes:
-#            - type: bind
-#              source: ./conf/fluentd
-#              target: /my/fluentd
-#            - type: bind
-#              source: ./scripts/fluentdservice
-#              target: /my/scripts
+    fluentdService:
+        #command: fluentd -c /my/fluentd/conf
+        #command: sleep infinity
+        command: /my/scripts/run
+        user: root
+        depends_on:
+            - dbService
+        environment:
+            - DB_SERVICE_ADDRESS=$TEST_LOGGING_DBSERVICE_IPV4_ADDRESS
+            - DB_SERVICE_PORT=$TEST_LOGGING_DBSERVICE_PORT
+            - DB_SERVICE_DATABASE=postgres
+            - DB_SERVICE_USERNAME=$TEST_LOGGING_DBSERVICE_POSTGRES_USER
+            - DB_SERVICE_PASSWORD=$TEST_LOGGING_DBSERVICE_POSTGRES_PASSWORD
+        image: fluentdservice
+        networks:
+            testLoggingNetwork:
+                ipv4_address: $TEST_LOGGING_FLUENTDSERVICE_IPV4_ADDRESS
+        ports:
+            - $TEST_LOGGING_FLUENTDSERVICE_PORT:$TEST_LOGGING_FLUENTDSERVICE_PORT
+        volumes:
+            - type: bind
+              source: ./conf/fluentd
+              target: /my/fluentd
+            - type: bind
+              source: ./scripts/fluentdservice
+              target: /my/scripts
 
 #    fluentbitService:
 #        command: /fluent-bit/bin/fluent-bit -c /my/fluentbit/conf
@@ -112,32 +112,32 @@ services:
 ##              source: ./scripts/fluentdservice
 ##              target: /my/scripts
 
-    logstashService:
-        #command: fluentd -c /my/fluentd/conf
-        #command: sleep infinity
-        command: /my/scripts/run
-        depends_on:
-            - dbService
-        environment:
-            - DB_SERVICE_ADDRESS=$TEST_LOGGING_DBSERVICE_IPV4_ADDRESS
-            - DB_SERVICE_PORT=$TEST_LOGGING_DBSERVICE_PORT
-            - DB_SERVICE_DATABASE=postgres
-            - DB_SERVICE_USERNAME=$TEST_LOGGING_DBSERVICE_POSTGRES_USER
-            - DB_SERVICE_PASSWORD=$TEST_LOGGING_DBSERVICE_POSTGRES_PASSWORD
-            - MY_PORT=$TEST_LOGGING_LOGSTASHSERVICE_PORT
-        image: logstashservice
-        networks:
-            testLoggingNetwork:
-                ipv4_address: $TEST_LOGGING_LOGSTASHSERVICE_IPV4_ADDRESS
-        ports:
-            - $TEST_LOGGING_LOGSTASHSERVICE_PORT:$TEST_LOGGING_LOGSTASHSERVICE_PORT
-        volumes:
-            - type: bind
-              source: ./conf/logstash
-              target: /my/logstash
-            - type: bind
-              source: ./scripts/logstash
-              target: /my/scripts
+#    logstashService:
+#        #command: fluentd -c /my/fluentd/conf
+#        #command: sleep infinity
+#        command: /my/scripts/run
+#        depends_on:
+#            - dbService
+#        environment:
+#            - DB_SERVICE_ADDRESS=$TEST_LOGGING_DBSERVICE_IPV4_ADDRESS
+#           - DB_SERVICE_PORT=$TEST_LOGGING_DBSERVICE_PORT
+#           - DB_SERVICE_DATABASE=postgres
+#            - DB_SERVICE_USERNAME=$TEST_LOGGING_DBSERVICE_POSTGRES_USER
+#            - DB_SERVICE_PASSWORD=$TEST_LOGGING_DBSERVICE_POSTGRES_PASSWORD
+#            - MY_PORT=$TEST_LOGGING_LOGSTASHSERVICE_PORT
+#        image: logstashservice
+#        networks:
+#            testLoggingNetwork:
+#                ipv4_address: $TEST_LOGGING_LOGSTASHSERVICE_IPV4_ADDRESS
+#        ports:
+#            - $TEST_LOGGING_LOGSTASHSERVICE_PORT:$TEST_LOGGING_LOGSTASHSERVICE_PORT
+#        volumes:
+#            - type: bind
+#              source: ./conf/logstash
+#              target: /my/logstash
+#            - type: bind
+#              source: ./scripts/logstash
+#              target: /my/scripts
 
 #    logstashServiceOld:
 #        #command: fluentd -c /my/fluentd/conf
